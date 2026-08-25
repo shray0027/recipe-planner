@@ -6,63 +6,174 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
+    interface RpMealSlot {
         /**
-          * The first name
+          * @default ''
          */
-        "first"?: string;
+        "day": string;
         /**
-          * The last name
+          * @default ''
          */
-        "last"?: string;
+        "imageUrl": string;
         /**
-          * The middle name
+          * @default ''
          */
-        "middle"?: string;
+        "recipeId": string;
+        /**
+          * @default ''
+         */
+        "recipeTitle": string;
+    }
+    interface RpRecipeCard {
+        /**
+          * @default false
+         */
+        "favorite": boolean;
+        /**
+          * @default ''
+         */
+        "imageUrl": string;
+        /**
+          * @default ''
+         */
+        "recipeId": string;
+        /**
+          * @default ''
+         */
+        "recipeTitle": string;
+        /**
+          * @default ''
+         */
+        "subtitle": string;
     }
 }
+export interface RpMealSlotCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRpMealSlotElement;
+}
+export interface RpRecipeCardCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRpRecipeCardElement;
+}
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLRpMealSlotElementEventMap {
+        "meal-slot-select": { day: string };
+        "meal-slot-remove": { day: string };
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    interface HTMLRpMealSlotElement extends Components.RpMealSlot, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLRpMealSlotElementEventMap>(type: K, listener: (this: HTMLRpMealSlotElement, ev: RpMealSlotCustomEvent<HTMLRpMealSlotElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLRpMealSlotElementEventMap>(type: K, listener: (this: HTMLRpMealSlotElement, ev: RpMealSlotCustomEvent<HTMLRpMealSlotElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLRpMealSlotElement: {
+        prototype: HTMLRpMealSlotElement;
+        new (): HTMLRpMealSlotElement;
+    };
+    interface HTMLRpRecipeCardElementEventMap {
+        "recipe-select": { recipeId: string };
+        "recipe-favorite-toggle": {
+    recipeId: string;
+    favorite: boolean;
+  };
+    }
+    interface HTMLRpRecipeCardElement extends Components.RpRecipeCard, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLRpRecipeCardElementEventMap>(type: K, listener: (this: HTMLRpRecipeCardElement, ev: RpRecipeCardCustomEvent<HTMLRpRecipeCardElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLRpRecipeCardElementEventMap>(type: K, listener: (this: HTMLRpRecipeCardElement, ev: RpRecipeCardCustomEvent<HTMLRpRecipeCardElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLRpRecipeCardElement: {
+        prototype: HTMLRpRecipeCardElement;
+        new (): HTMLRpRecipeCardElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "rp-meal-slot": HTMLRpMealSlotElement;
+        "rp-recipe-card": HTMLRpRecipeCardElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
+    interface RpMealSlot {
         /**
-          * The first name
+          * @default ''
          */
-        "first"?: string;
+        "day"?: string;
         /**
-          * The last name
+          * @default ''
          */
-        "last"?: string;
+        "imageUrl"?: string;
+        "onMeal-slot-remove"?: (event: RpMealSlotCustomEvent<{ day: string }>) => void;
+        "onMeal-slot-select"?: (event: RpMealSlotCustomEvent<{ day: string }>) => void;
         /**
-          * The middle name
+          * @default ''
          */
-        "middle"?: string;
+        "recipeId"?: string;
+        /**
+          * @default ''
+         */
+        "recipeTitle"?: string;
+    }
+    interface RpRecipeCard {
+        /**
+          * @default false
+         */
+        "favorite"?: boolean;
+        /**
+          * @default ''
+         */
+        "imageUrl"?: string;
+        "onRecipe-favorite-toggle"?: (event: RpRecipeCardCustomEvent<{
+    recipeId: string;
+    favorite: boolean;
+  }>) => void;
+        "onRecipe-select"?: (event: RpRecipeCardCustomEvent<{ recipeId: string }>) => void;
+        /**
+          * @default ''
+         */
+        "recipeId"?: string;
+        /**
+          * @default ''
+         */
+        "recipeTitle"?: string;
+        /**
+          * @default ''
+         */
+        "subtitle"?: string;
     }
 
-    interface MyComponentAttributes {
-        "first": string;
-        "middle": string;
-        "last": string;
+    interface RpMealSlotAttributes {
+        "day": string;
+        "recipeId": string;
+        "recipeTitle": string;
+        "imageUrl": string;
+    }
+    interface RpRecipeCardAttributes {
+        "recipeId": string;
+        "recipeTitle": string;
+        "imageUrl": string;
+        "subtitle": string;
+        "favorite": boolean;
     }
 
     interface IntrinsicElements {
-        "my-component": Omit<MyComponent, keyof MyComponentAttributes> & { [K in keyof MyComponent & keyof MyComponentAttributes]?: MyComponent[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `attr:${K}`]?: MyComponentAttributes[K] } & { [K in keyof MyComponent & keyof MyComponentAttributes as `prop:${K}`]?: MyComponent[K] };
+        "rp-meal-slot": Omit<RpMealSlot, keyof RpMealSlotAttributes> & { [K in keyof RpMealSlot & keyof RpMealSlotAttributes]?: RpMealSlot[K] } & { [K in keyof RpMealSlot & keyof RpMealSlotAttributes as `attr:${K}`]?: RpMealSlotAttributes[K] } & { [K in keyof RpMealSlot & keyof RpMealSlotAttributes as `prop:${K}`]?: RpMealSlot[K] };
+        "rp-recipe-card": Omit<RpRecipeCard, keyof RpRecipeCardAttributes> & { [K in keyof RpRecipeCard & keyof RpRecipeCardAttributes]?: RpRecipeCard[K] } & { [K in keyof RpRecipeCard & keyof RpRecipeCardAttributes as `attr:${K}`]?: RpRecipeCardAttributes[K] } & { [K in keyof RpRecipeCard & keyof RpRecipeCardAttributes as `prop:${K}`]?: RpRecipeCard[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.IntrinsicElements["my-component"] & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "rp-meal-slot": LocalJSX.IntrinsicElements["rp-meal-slot"] & JSXBase.HTMLAttributes<HTMLRpMealSlotElement>;
+            "rp-recipe-card": LocalJSX.IntrinsicElements["rp-recipe-card"] & JSXBase.HTMLAttributes<HTMLRpRecipeCardElement>;
         }
     }
 }
