@@ -1,0 +1,10 @@
+{
+  "name": "recipe-finder-meal-planner",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev:web": "npm --prefix apps/web run dev",
+    "dev:ui": "npm --prefix packages/recipe-ui run start",
+    "build": "npm --prefix apps/web run build && npm --prefix packages/recipe-ui run build"
+  }
+}
