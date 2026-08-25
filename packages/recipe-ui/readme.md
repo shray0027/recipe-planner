@@ -30,4 +30,4 @@ npm run build
 npm publish
 ```
 
-The first public release is `0.1.0`. Replace `YOUR_GITHUB_USERNAME` in `package.json` before publishing.
+Source: https://github.com/shray0027/svelte-recipe-app
