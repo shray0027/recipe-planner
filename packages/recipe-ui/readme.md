@@ -1,4 +1,4 @@
-# @shrayanand/recipe-ui
+# @shray0027/recipe-ui
 
 Reusable recipe cards and meal-planner web components built with Stencil.
 
@@ -12,13 +12,13 @@ Both components use Shadow DOM. `rp-recipe-card` provides an `actions` slot and 
 ## Install
 
 ```bash
-npm install @shrayanand/recipe-ui
+npm install @shray0027/recipe-ui
 ```
 
 Register the custom elements once in the browser:
 
 ```ts
-import { defineCustomElements } from '@shrayanand/recipe-ui/loader';
+import { defineCustomElements } from '@shray0027/recipe-ui/loader';
 
 defineCustomElements();
 ```
