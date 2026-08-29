@@ -44,6 +44,16 @@ npm --prefix apps/web run build
 - Personal recipes, favorites, and meal plans are stored in `localStorage`, so they are specific to one browser and device.
 - The meal planner offers personal recipes and favorite recipes, ensuring planned API recipes can be loaded again later.
 
+## Deployment
+
+### GitHub Pages
+
+The repository includes a workflow that builds and deploys on every push to `main`. Enable GitHub Pages with **GitHub Actions** as the source, then push the repository to GitHub.
+
+### Vercel
+
+Import the repository into Vercel and set `apps/web` as the project root directory. Use `npm run build` as the build command and `build` as the output directory. The included `vercel.json` rewrites direct client-side route visits, such as `/recipes/52772`, to the app entry point.
+
 ## Links
 
 - Stencil library: [`@shray0027/recipe-ui`](https://www.npmjs.com/package/@shray0027/recipe-ui)
