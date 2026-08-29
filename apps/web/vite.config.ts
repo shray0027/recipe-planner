@@ -7,6 +7,9 @@ const configuredBasePath = process.env.BASE_PATH?.replace(/^\/+|\/+$/g, '');
 const basePath = configuredBasePath ? (`/${configuredBasePath}` as `/${string}`) : '';
 
 export default defineConfig({
+	optimizeDeps: {
+		exclude: ['@shray0027/recipe-ui/loader']
+	},
 	plugins: [
 		tailwindcss(),
 		sveltekit({

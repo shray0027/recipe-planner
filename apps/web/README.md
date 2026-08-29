@@ -1,42 +1,51 @@
-# sv
+# Recipe Finder & Meal Planner
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A SvelteKit recipe app that uses TheMealDB for discovery, browser storage for user data, and published Stencil Web Components for shared UI.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Search, browse, and filter recipes from TheMealDB.
+- View ingredients and cooking instructions.
+- Create, edit, validate, and delete personal recipes.
+- Save and remove favorite recipes.
+- Plan favorite or personal recipes for each day of the week.
 
-```sh
-# create a new project
-npx sv create my-app
-```
+## Tech stack
 
-To recreate this project with the same configuration:
+- Svelte 5 and SvelteKit
+- Tailwind CSS
+- Stencil Web Components from [`@shray0027/recipe-ui`](https://www.npmjs.com/package/@shray0027/recipe-ui)
+- TheMealDB API
 
-```sh
-# recreate this project
-npx sv@0.17.0 create --template minimal --types ts --install npm apps/web
-```
+## Setup
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
+From the repository root, install the web app dependencies:
 
 ```sh
-npm run build
+npm --prefix apps/web ci
 ```
 
-You can preview the production build with `npm run preview`.
+Start the development server:
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```sh
+npm run dev:web
+```
+
+Build and type-check the app:
+
+```sh
+npm run check
+npm --prefix apps/web run build
+```
+
+## Assumptions
+
+- TheMealDB is available from the browser at runtime.
+- Personal recipes, favorites, and meal plans are stored in `localStorage`, so they are specific to one browser and device.
+- The meal planner offers personal recipes and favorite recipes, ensuring planned API recipes can be loaded again later.
+
+## Links
+
+- Stencil library: [`@shray0027/recipe-ui`](https://www.npmjs.com/package/@shray0027/recipe-ui)
+- GitHub repository: [shray0027/svelte-recipe-app](https://github.com/shray0027/svelte-recipe-app)
+- GitHub Pages deployment: `https://shray0027.github.io/svelte-recipe-app/` after the configured deployment workflow has run successfully.
