@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+	--color-recipe-50: #f6f8f3;
+	--color-recipe-100: #edf3e9;
+	--color-recipe-300: #c7d2c2;
+	--color-recipe-600: #3f6b45;
+	--color-recipe-700: #355d3b;
+	--color-recipe-900: #20301f;
+}

@@ -1,8 +1,15 @@
 <script lang="ts">
 	import { base } from '$app/paths';
+	import { defineCustomElements } from '@shray0027/recipe-ui/loader';
 	import favicon from '$lib/assets/favicon.svg';
+	import '../app.css';
+	import { onMount } from 'svelte';
 
 	let { children } = $props();
+
+	onMount(() => {
+		void defineCustomElements();
+	});
 </script>
 
 <svelte:head>
@@ -10,88 +17,16 @@
 	<meta name="description" content="Find recipes, save favorites, and plan meals for the week." />
 </svelte:head>
 
-<header>
-	<a class="brand" href={`${base}/`}>Recipe planner</a>
-	<nav aria-label="Main navigation">
+<header class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-4 py-5 sm:flex-row sm:items-center sm:px-6">
+	<a class="text-xl font-extrabold text-recipe-700 no-underline" href={`${base}/`}>Recipe planner</a>
+	<nav class="flex flex-wrap items-center gap-4" aria-label="Main navigation">
 		<a href={`${base}/`}>Discover</a>
 		<a href={`${base}/favorites`}>Favorites</a>
 		<a href={`${base}/planner`}>Planner</a>
-		<a class="add-recipe" href={`${base}/recipes/new`}>Add recipe</a>
+		<a class="rounded-lg bg-recipe-600 px-3 py-2 font-bold text-white no-underline" href={`${base}/recipes/new`}>Add recipe</a>
 	</nav>
 </header>
 
-<main>
+<main class="mx-auto max-w-6xl px-4 py-6 sm:px-6">
 	{@render children()}
 </main>
-
-<style>
-	:global(*) {
-		box-sizing: border-box;
-	}
-
-	:global(body) {
-		min-width: 320px;
-		margin: 0;
-		color: #20301f;
-		background: #f6f8f3;
-		font-family: Arial, sans-serif;
-	}
-
-	:global(a) {
-		color: inherit;
-	}
-
-	header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 24px;
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 20px 24px;
-	}
-
-	.brand {
-		color: #244c2a;
-		font-size: 1.2rem;
-		font-weight: 800;
-		text-decoration: none;
-	}
-
-	nav {
-		display: flex;
-		align-items: center;
-		flex-wrap: wrap;
-		gap: 16px;
-	}
-
-	nav a {
-		text-decoration: none;
-	}
-
-	.add-recipe {
-		padding: 9px 12px;
-		border-radius: 8px;
-		color: #ffffff;
-		background: #3f6b45;
-		font-weight: 700;
-	}
-
-	main {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 24px;
-	}
-
-	@media (max-width: 640px) {
-		header {
-			align-items: flex-start;
-			flex-direction: column;
-			gap: 14px;
-		}
-
-		main {
-			padding: 16px;
-		}
-	}
-</style>

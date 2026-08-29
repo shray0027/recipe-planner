@@ -1,6 +1,6 @@
 {
   "name": "@shray0027/recipe-ui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Reusable recipe cards and meal-plan web components built with Stencil.",
   "type": "module",
   "main": "./dist/index.cjs.js",

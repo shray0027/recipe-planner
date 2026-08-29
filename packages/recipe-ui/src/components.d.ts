@@ -6,6 +6,16 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface RpFavoriteButton {
+        /**
+          * @default false
+         */
+        "favorite": boolean;
+        /**
+          * @default ''
+         */
+        "recipeTitle": string;
+    }
     interface RpMealSlot {
         /**
           * @default ''
@@ -46,6 +56,42 @@ export namespace Components {
          */
         "subtitle": string;
     }
+    interface RpSearchInput {
+        /**
+          * @default 'Search recipes'
+         */
+        "label": string;
+        /**
+          * @default 'Search recipes'
+         */
+        "placeholder": string;
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
+    interface RpSelect {
+        /**
+          * @default ''
+         */
+        "label": string;
+        /**
+          * @default []
+         */
+        "options": string[];
+        /**
+          * @default 'All options'
+         */
+        "placeholder": string;
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
+}
+export interface RpFavoriteButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRpFavoriteButtonElement;
 }
 export interface RpMealSlotCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -55,7 +101,32 @@ export interface RpRecipeCardCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLRpRecipeCardElement;
 }
+export interface RpSearchInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRpSearchInputElement;
+}
+export interface RpSelectCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRpSelectElement;
+}
 declare global {
+    interface HTMLRpFavoriteButtonElementEventMap {
+        "favorite-toggle": { favorite: boolean };
+    }
+    interface HTMLRpFavoriteButtonElement extends Components.RpFavoriteButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLRpFavoriteButtonElementEventMap>(type: K, listener: (this: HTMLRpFavoriteButtonElement, ev: RpFavoriteButtonCustomEvent<HTMLRpFavoriteButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLRpFavoriteButtonElementEventMap>(type: K, listener: (this: HTMLRpFavoriteButtonElement, ev: RpFavoriteButtonCustomEvent<HTMLRpFavoriteButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLRpFavoriteButtonElement: {
+        prototype: HTMLRpFavoriteButtonElement;
+        new (): HTMLRpFavoriteButtonElement;
+    };
     interface HTMLRpMealSlotElementEventMap {
         "meal-slot-select": { day: string };
         "meal-slot-remove": { day: string };
@@ -95,12 +166,60 @@ declare global {
         prototype: HTMLRpRecipeCardElement;
         new (): HTMLRpRecipeCardElement;
     };
+    interface HTMLRpSearchInputElementEventMap {
+        "value-change": { value: string };
+    }
+    interface HTMLRpSearchInputElement extends Components.RpSearchInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLRpSearchInputElementEventMap>(type: K, listener: (this: HTMLRpSearchInputElement, ev: RpSearchInputCustomEvent<HTMLRpSearchInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLRpSearchInputElementEventMap>(type: K, listener: (this: HTMLRpSearchInputElement, ev: RpSearchInputCustomEvent<HTMLRpSearchInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLRpSearchInputElement: {
+        prototype: HTMLRpSearchInputElement;
+        new (): HTMLRpSearchInputElement;
+    };
+    interface HTMLRpSelectElementEventMap {
+        "value-change": { value: string };
+    }
+    interface HTMLRpSelectElement extends Components.RpSelect, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLRpSelectElementEventMap>(type: K, listener: (this: HTMLRpSelectElement, ev: RpSelectCustomEvent<HTMLRpSelectElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLRpSelectElementEventMap>(type: K, listener: (this: HTMLRpSelectElement, ev: RpSelectCustomEvent<HTMLRpSelectElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLRpSelectElement: {
+        prototype: HTMLRpSelectElement;
+        new (): HTMLRpSelectElement;
+    };
     interface HTMLElementTagNameMap {
+        "rp-favorite-button": HTMLRpFavoriteButtonElement;
         "rp-meal-slot": HTMLRpMealSlotElement;
         "rp-recipe-card": HTMLRpRecipeCardElement;
+        "rp-search-input": HTMLRpSearchInputElement;
+        "rp-select": HTMLRpSelectElement;
     }
 }
 declare namespace LocalJSX {
+    interface RpFavoriteButton {
+        /**
+          * @default false
+         */
+        "favorite"?: boolean;
+        "onFavorite-toggle"?: (event: RpFavoriteButtonCustomEvent<{ favorite: boolean }>) => void;
+        /**
+          * @default ''
+         */
+        "recipeTitle"?: string;
+    }
     interface RpMealSlot {
         /**
           * @default ''
@@ -148,7 +267,45 @@ declare namespace LocalJSX {
          */
         "subtitle"?: string;
     }
+    interface RpSearchInput {
+        /**
+          * @default 'Search recipes'
+         */
+        "label"?: string;
+        "onValue-change"?: (event: RpSearchInputCustomEvent<{ value: string }>) => void;
+        /**
+          * @default 'Search recipes'
+         */
+        "placeholder"?: string;
+        /**
+          * @default ''
+         */
+        "value"?: string;
+    }
+    interface RpSelect {
+        /**
+          * @default ''
+         */
+        "label"?: string;
+        "onValue-change"?: (event: RpSelectCustomEvent<{ value: string }>) => void;
+        /**
+          * @default []
+         */
+        "options"?: string[];
+        /**
+          * @default 'All options'
+         */
+        "placeholder"?: string;
+        /**
+          * @default ''
+         */
+        "value"?: string;
+    }
 
+    interface RpFavoriteButtonAttributes {
+        "favorite": boolean;
+        "recipeTitle": string;
+    }
     interface RpMealSlotAttributes {
         "day": string;
         "recipeId": string;
@@ -162,18 +319,34 @@ declare namespace LocalJSX {
         "subtitle": string;
         "favorite": boolean;
     }
+    interface RpSearchInputAttributes {
+        "label": string;
+        "placeholder": string;
+        "value": string;
+    }
+    interface RpSelectAttributes {
+        "label": string;
+        "placeholder": string;
+        "value": string;
+    }
 
     interface IntrinsicElements {
+        "rp-favorite-button": Omit<RpFavoriteButton, keyof RpFavoriteButtonAttributes> & { [K in keyof RpFavoriteButton & keyof RpFavoriteButtonAttributes]?: RpFavoriteButton[K] } & { [K in keyof RpFavoriteButton & keyof RpFavoriteButtonAttributes as `attr:${K}`]?: RpFavoriteButtonAttributes[K] } & { [K in keyof RpFavoriteButton & keyof RpFavoriteButtonAttributes as `prop:${K}`]?: RpFavoriteButton[K] };
         "rp-meal-slot": Omit<RpMealSlot, keyof RpMealSlotAttributes> & { [K in keyof RpMealSlot & keyof RpMealSlotAttributes]?: RpMealSlot[K] } & { [K in keyof RpMealSlot & keyof RpMealSlotAttributes as `attr:${K}`]?: RpMealSlotAttributes[K] } & { [K in keyof RpMealSlot & keyof RpMealSlotAttributes as `prop:${K}`]?: RpMealSlot[K] };
         "rp-recipe-card": Omit<RpRecipeCard, keyof RpRecipeCardAttributes> & { [K in keyof RpRecipeCard & keyof RpRecipeCardAttributes]?: RpRecipeCard[K] } & { [K in keyof RpRecipeCard & keyof RpRecipeCardAttributes as `attr:${K}`]?: RpRecipeCardAttributes[K] } & { [K in keyof RpRecipeCard & keyof RpRecipeCardAttributes as `prop:${K}`]?: RpRecipeCard[K] };
+        "rp-search-input": Omit<RpSearchInput, keyof RpSearchInputAttributes> & { [K in keyof RpSearchInput & keyof RpSearchInputAttributes]?: RpSearchInput[K] } & { [K in keyof RpSearchInput & keyof RpSearchInputAttributes as `attr:${K}`]?: RpSearchInputAttributes[K] } & { [K in keyof RpSearchInput & keyof RpSearchInputAttributes as `prop:${K}`]?: RpSearchInput[K] };
+        "rp-select": Omit<RpSelect, keyof RpSelectAttributes> & { [K in keyof RpSelect & keyof RpSelectAttributes]?: RpSelect[K] } & { [K in keyof RpSelect & keyof RpSelectAttributes as `attr:${K}`]?: RpSelectAttributes[K] } & { [K in keyof RpSelect & keyof RpSelectAttributes as `prop:${K}`]?: RpSelect[K] };
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "rp-favorite-button": LocalJSX.IntrinsicElements["rp-favorite-button"] & JSXBase.HTMLAttributes<HTMLRpFavoriteButtonElement>;
             "rp-meal-slot": LocalJSX.IntrinsicElements["rp-meal-slot"] & JSXBase.HTMLAttributes<HTMLRpMealSlotElement>;
             "rp-recipe-card": LocalJSX.IntrinsicElements["rp-recipe-card"] & JSXBase.HTMLAttributes<HTMLRpRecipeCardElement>;
+            "rp-search-input": LocalJSX.IntrinsicElements["rp-search-input"] & JSXBase.HTMLAttributes<HTMLRpSearchInputElement>;
+            "rp-select": LocalJSX.IntrinsicElements["rp-select"] & JSXBase.HTMLAttributes<HTMLRpSelectElement>;
         }
     }
 }
