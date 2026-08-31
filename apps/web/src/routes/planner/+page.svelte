@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { onMount } from 'svelte';
 	import { loadRecipesById } from '$lib/recipes/recipe-loader';
 	import { recipeStore } from '$lib/recipes/store';
@@ -91,7 +91,7 @@
 			</div>
 			{#if recipes.length === 0}
 				<p class="text-stone-700">Save a recipe first, then return here to add it to your plan.</p>
-				<a class="mt-3 inline-block font-bold text-recipe-700" href={`${base}/`}>Discover recipes</a>
+				<a class="mt-3 inline-block font-bold text-recipe-700" href={resolve('/')}>Discover recipes</a>
 			{:else}
 				<div class="grid grid-cols-[repeat(auto-fill,minmax(190px,1fr))] gap-3">
 					{#each recipes as recipe (recipe.id)}

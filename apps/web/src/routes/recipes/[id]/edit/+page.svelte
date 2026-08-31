@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import RecipeForm from '$lib/components/RecipeForm.svelte';
@@ -26,7 +26,7 @@
 
 	function saveRecipe(nextDraft: RecipeDraft) {
 		const recipe = recipeStore.saveUserRecipe(nextDraft, recipeId);
-		if (recipe) void goto(`${base}/recipes/${recipe.id}`);
+		if (recipe) void goto(resolve('/recipes/[id]', { id: recipe.id }));
 	}
 </script>
 
@@ -35,7 +35,7 @@
 </svelte:head>
 
 <section class="max-w-3xl py-8">
-	<a class="font-bold text-recipe-700" href={`${base}/`}>← Back to recipes</a>
+	<a class="font-bold text-recipe-700" href={resolve('/')}>← Back to recipes</a>
 	{#if draft}
 		<h1 class="mt-6 mb-2 text-4xl font-extrabold text-recipe-900">Edit recipe</h1>
 		<p class="mb-8 text-stone-600">Update your saved recipe.</p>

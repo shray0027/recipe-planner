@@ -64,11 +64,13 @@
 <form class="grid gap-7" onsubmit={submit}>
 	<section class="grid gap-4 rounded-2xl bg-white p-6 shadow-sm">
 		<h2 class="text-xl font-extrabold text-recipe-900">Recipe details</h2>
-		<label class="grid gap-1.5 text-sm font-bold text-recipe-900">
-			<span>Recipe title</span>
-			<input class="min-h-10 rounded-lg border border-recipe-300 px-3" bind:value={draft.title} />
+		<div class="grid gap-1.5">
+			<rp-text-input
+				use:setElementProps={{ label: 'Recipe title', value: draft.title }}
+				onvalue-change={(event: CustomEvent<{ value: string }>) => (draft.title = event.detail.value)}
+			></rp-text-input>
 			{#if errors.title}<span class="text-sm text-rose-700">{errors.title}</span>{/if}
-		</label>
+		</div>
 		<div class="grid gap-4 sm:grid-cols-2">
 			<div class="grid gap-1.5 text-sm font-bold text-recipe-900">
 				<rp-select
@@ -82,15 +84,15 @@
 				></rp-select>
 				{#if errors.category}<span class="text-sm text-rose-700">{errors.category}</span>{/if}
 			</div>
-			<label class="grid gap-1.5 text-sm font-bold text-recipe-900">
-				<span>Cuisine <span class="font-normal text-stone-500">(optional)</span></span>
-				<input class="min-h-10 rounded-lg border border-recipe-300 px-3" bind:value={draft.area} placeholder="For example, Italian" />
-			</label>
+			<rp-text-input
+				use:setElementProps={{ label: 'Cuisine', optional: true, placeholder: 'For example, Italian', value: draft.area }}
+				onvalue-change={(event: CustomEvent<{ value: string }>) => (draft.area = event.detail.value)}
+			></rp-text-input>
 		</div>
-		<label class="grid gap-1.5 text-sm font-bold text-recipe-900">
-			<span>Image URL <span class="font-normal text-stone-500">(optional)</span></span>
-			<input class="min-h-10 rounded-lg border border-recipe-300 px-3" type="url" bind:value={draft.imageUrl} placeholder="https://example.com/recipe.jpg" />
-		</label>
+		<rp-text-input
+			use:setElementProps={{ label: 'Image URL', optional: true, placeholder: 'https://example.com/recipe.jpg', type: 'url', value: draft.imageUrl }}
+			onvalue-change={(event: CustomEvent<{ value: string }>) => (draft.imageUrl = event.detail.value)}
+		></rp-text-input>
 	</section>
 
 	<section class="grid gap-4 rounded-2xl bg-white p-6 shadow-sm">

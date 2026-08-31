@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { defineCustomElements } from '@shray0027/recipe-ui/loader';
 	import favicon from '$lib/assets/favicon.svg';
 	import '../app.css';
@@ -18,12 +18,12 @@
 </svelte:head>
 
 <header class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-4 py-5 sm:flex-row sm:items-center sm:px-6">
-	<a class="text-xl font-extrabold text-recipe-700 no-underline" href={`${base}/`}>Recipe planner</a>
+	<a class="text-xl font-extrabold text-recipe-700 no-underline" href={resolve('/')}>Recipe planner</a>
 	<nav class="flex flex-wrap items-center gap-4" aria-label="Main navigation">
-		<a href={`${base}/`}>Discover</a>
-		<a href={`${base}/favorites`}>Favorites</a>
-		<a href={`${base}/planner`}>Planner</a>
-		<a class="rounded-lg bg-recipe-600 px-3 py-2 font-bold text-white no-underline" href={`${base}/recipes/new`}>Add recipe</a>
+		<a href={resolve('/')}>Discover</a>
+		<a href={resolve('/favorites')}>Favorites</a>
+		<a href={resolve('/planner')}>Planner</a>
+		<a class="rounded-lg bg-recipe-600 px-3 py-2 font-bold text-white no-underline" href={resolve('/recipes/new')}>Add recipe</a>
 	</nav>
 </header>
 

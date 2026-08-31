@@ -1,7 +1,5 @@
 <script lang="ts">
-import {
-    base
-} from '$app/paths';
+import { resolve } from '$app/paths';
 import {
     page
 } from '$app/state';
@@ -59,7 +57,7 @@ function setFavorite(nextFavorite: boolean) {
 function deleteRecipe() {
     if (!recipe || !confirm(`Delete ${recipe.title}?`)) return;
     recipeStore.deleteUserRecipe(recipe.id);
-    void goto(`${base}/`);
+    void goto(resolve('/'));
 }
 
 onMount(() => void loadRecipe());
@@ -67,192 +65,50 @@ onMount(() => void loadRecipe());
 
 <svelte:head>
     <title>{recipe ? `${recipe.title} | Recipe planner` : 'Recipe details | Recipe planner'}</title>
-    </svelte:head>
+</svelte:head>
 
-    {#if loading}
-    <p class="message">Loading recipe…</p>
-    {:else if error || !recipe}
-    <section class="message error">
-        <h1>Recipe unavailable</h1>
+{#if loading}
+    <p class="mt-9 rounded-2xl bg-white p-6 text-stone-700">Loading recipe…</p>
+{:else if error || !recipe}
+    <section class="mt-9 rounded-2xl border border-rose-200 bg-white p-6">
+        <h1 class="mb-3 text-3xl font-extrabold text-recipe-900">Recipe unavailable</h1>
         <p>{error}</p>
-        <a href={`${base}/`}>Back to recipes</a>
+        <a class="mt-4 inline-block font-bold text-recipe-700" href={resolve('/')}>Back to recipes</a>
     </section>
-    {:else}
-    <section class="recipe-header">
-        <a class="back" href={`${base}/`}>← Back to recipes</a>
-        <div class="header-content">
+{:else}
+    <section class="py-6 pb-10">
+        <a class="mb-6 inline-block font-bold text-recipe-700" href={resolve('/')}>← Back to recipes</a>
+        <div class="grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(260px,420px)]">
             <div>
-                <p class="eyebrow">{recipe.source === 'local' ? 'My recipe' : 'Recipe'}</p>
-                <h1>{recipe.title}</h1>
-                <p class="meta">{recipe.category}{recipe.area ? ` · ${recipe.area}` : ''}</p>
-                <div class="actions">
+                <p class="mb-2 text-xs font-extrabold tracking-widest text-recipe-600 uppercase">{recipe.source === 'local' ? 'My recipe' : 'Recipe'}</p>
+                <h1 class="mb-2 text-4xl leading-none font-extrabold tracking-tight text-recipe-900 sm:text-6xl">{recipe.title}</h1>
+                <p class="text-lg text-stone-600">{recipe.category}{recipe.area ? ` · ${recipe.area}` : ''}</p>
+                <div class="mt-6 flex flex-wrap gap-2.5">
                     <rp-favorite-button
                         use:setElementProps={{ favorite, recipeTitle: recipe.title }}
                         onfavorite-toggle={(event: CustomEvent<{ favorite: boolean }>) => setFavorite(event.detail.favorite)}
                     ></rp-favorite-button>
                     {#if recipe.source === 'local'}
-                    <a class="edit" href={`${base}/recipes/${recipe.id}/edit`}>Edit recipe</a>
-                    <button type="button" class="delete" onclick={deleteRecipe}>Delete recipe</button>
+                        <a class="min-h-10 rounded-lg border border-recipe-600 bg-white px-3 py-2 font-bold text-recipe-700" href={resolve('/recipes/[id]/edit', { id: recipe.id })}>Edit recipe</a>
+                        <button class="min-h-10 rounded-lg border border-rose-200 bg-white px-3 py-2 font-bold text-rose-800" type="button" onclick={deleteRecipe}>Delete recipe</button>
                     {/if}
                 </div>
             </div>
             {#if recipe.imageUrl}
-            <img src={recipe.imageUrl} alt={recipe.title} />
+                <img class="aspect-4/3 w-full rounded-2xl object-cover" src={recipe.imageUrl} alt={recipe.title} />
             {/if}
         </div>
     </section>
 
-    <div class="details-grid">
-        <section>
-            <h2>Ingredients</h2>
-            <ul class="ingredients">
-                {#each recipe.ingredients as ingredient}
-                <li>{ingredient.measure ? `${ingredient.measure} ` : ''}{ingredient.name}</li>
-                {/each}
-            </ul>
-        </section>
-        <section>
-            <h2>Instructions</h2>
-            <ol class="instructions">
-                {#each recipe.instructions as instruction}
-                <li>{instruction}</li>
-                {/each}
-            </ol>
-        </section>
+    <div class="grid gap-8 pb-12 lg:grid-cols-[minmax(220px,.7fr)_minmax(0,1.3fr)]">
+        <rp-recipe-list
+            use:setElementProps={{
+                heading: 'Ingredients',
+                items: recipe.ingredients.map((ingredient) => `${ingredient.measure ? `${ingredient.measure} ` : ''}${ingredient.name}`)
+            }}
+        ></rp-recipe-list>
+        <rp-recipe-list
+            use:setElementProps={{ heading: 'Instructions', items: recipe.instructions, ordered: true }}
+        ></rp-recipe-list>
     </div>
-    {/if}
-
-<style>
-.recipe-header {
-    padding: 24px 0 40px;
-}
-
-.back {
-    display: inline-block;
-    margin-bottom: 24px;
-    color: #355d3b;
-    font-weight: 700;
-}
-
-.header-content {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
-    gap: 40px;
-    align-items: center;
-}
-
-.eyebrow {
-    margin: 0 0 8px;
-    color: #3f6b45;
-    font-size: 0.8rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-h1,
-h2,
-p {
-    margin-top: 0;
-}
-
-h1 {
-    margin-bottom: 10px;
-    font-size: clamp(2.25rem, 6vw, 4rem);
-    line-height: 1;
-}
-
-.meta {
-    color: #5c6b5a;
-    font-size: 1.05rem;
-}
-
-img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    border-radius: 14px;
-    object-fit: cover;
-}
-
-.actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 24px;
-}
-
-.actions :is(button, .edit) {
-    min-height: 42px;
-    border: 1px solid #3f6b45;
-    border-radius: 8px;
-    padding: 9px 12px;
-    color: #ffffff;
-    background: #3f6b45;
-    font: inherit;
-    font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.actions .edit {
-    color: #355d3b;
-    background: #ffffff;
-}
-
-.actions .delete {
-    color: #8d2538;
-    border-color: #e7b6be;
-    background: #ffffff;
-}
-
-.details-grid {
-    display: grid;
-    grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
-    gap: 32px;
-    padding-bottom: 48px;
-}
-
-.details-grid section,
-.message {
-    padding: 24px;
-    border-radius: 14px;
-    background: #ffffff;
-}
-
-h2 {
-    margin-bottom: 16px;
-}
-
-.ingredients,
-.instructions {
-    margin: 0;
-    padding-left: 22px;
-}
-
-.ingredients li,
-.instructions li {
-    margin-bottom: 12px;
-    line-height: 1.55;
-}
-
-.message {
-    margin-top: 36px;
-}
-
-.message.error {
-    border: 1px solid #e7b6be;
-}
-
-@media (max-width: 700px) {
-
-    .header-content,
-    .details-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-    }
-
-    .header-content img {
-        max-width: 560px;
-    }
-}
-</style>
+{/if}

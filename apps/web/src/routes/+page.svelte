@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { recipeApi } from '$lib/recipes/recipe-api';
@@ -71,7 +71,7 @@
 	}
 
 	function openRecipe(recipeId: string) {
-		void goto(`${base}/recipes/${recipeId}`);
+		void goto(resolve('/recipes/[id]', { id: recipeId }));
 	}
 
 	onMount(() => {
@@ -115,7 +115,7 @@
 			<p class="mb-2 text-xs font-extrabold tracking-widest text-recipe-600 uppercase">Recipe discovery</p>
 			<h2 class="text-3xl font-extrabold text-recipe-900">{loading ? 'Finding recipes…' : `${recipes.length} recipes`}</h2>
 		</div>
-		<a class="font-bold text-recipe-700" href={`${base}/recipes/new`}>Create your own recipe</a>
+		<a class="font-bold text-recipe-700" href={resolve('/recipes/new')}>Create your own recipe</a>
 	</div>
 
 	{#if error}

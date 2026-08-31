@@ -56,6 +56,20 @@ export namespace Components {
          */
         "subtitle": string;
     }
+    interface RpRecipeList {
+        /**
+          * @default ''
+         */
+        "heading": string;
+        /**
+          * @default []
+         */
+        "items": string[];
+        /**
+          * @default false
+         */
+        "ordered": boolean;
+    }
     interface RpSearchInput {
         /**
           * @default 'Search recipes'
@@ -88,6 +102,28 @@ export namespace Components {
          */
         "value": string;
     }
+    interface RpTextInput {
+        /**
+          * @default ''
+         */
+        "label": string;
+        /**
+          * @default false
+         */
+        "optional": boolean;
+        /**
+          * @default ''
+         */
+        "placeholder": string;
+        /**
+          * @default 'text'
+         */
+        "type": 'text' | 'url';
+        /**
+          * @default ''
+         */
+        "value": string;
+    }
 }
 export interface RpFavoriteButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -108,6 +144,10 @@ export interface RpSearchInputCustomEvent<T> extends CustomEvent<T> {
 export interface RpSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLRpSelectElement;
+}
+export interface RpTextInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLRpTextInputElement;
 }
 declare global {
     interface HTMLRpFavoriteButtonElementEventMap {
@@ -166,6 +206,12 @@ declare global {
         prototype: HTMLRpRecipeCardElement;
         new (): HTMLRpRecipeCardElement;
     };
+    interface HTMLRpRecipeListElement extends Components.RpRecipeList, HTMLStencilElement {
+    }
+    var HTMLRpRecipeListElement: {
+        prototype: HTMLRpRecipeListElement;
+        new (): HTMLRpRecipeListElement;
+    };
     interface HTMLRpSearchInputElementEventMap {
         "value-change": { value: string };
     }
@@ -200,12 +246,31 @@ declare global {
         prototype: HTMLRpSelectElement;
         new (): HTMLRpSelectElement;
     };
+    interface HTMLRpTextInputElementEventMap {
+        "value-change": { value: string };
+    }
+    interface HTMLRpTextInputElement extends Components.RpTextInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLRpTextInputElementEventMap>(type: K, listener: (this: HTMLRpTextInputElement, ev: RpTextInputCustomEvent<HTMLRpTextInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLRpTextInputElementEventMap>(type: K, listener: (this: HTMLRpTextInputElement, ev: RpTextInputCustomEvent<HTMLRpTextInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLRpTextInputElement: {
+        prototype: HTMLRpTextInputElement;
+        new (): HTMLRpTextInputElement;
+    };
     interface HTMLElementTagNameMap {
         "rp-favorite-button": HTMLRpFavoriteButtonElement;
         "rp-meal-slot": HTMLRpMealSlotElement;
         "rp-recipe-card": HTMLRpRecipeCardElement;
+        "rp-recipe-list": HTMLRpRecipeListElement;
         "rp-search-input": HTMLRpSearchInputElement;
         "rp-select": HTMLRpSelectElement;
+        "rp-text-input": HTMLRpTextInputElement;
     }
 }
 declare namespace LocalJSX {
@@ -267,6 +332,20 @@ declare namespace LocalJSX {
          */
         "subtitle"?: string;
     }
+    interface RpRecipeList {
+        /**
+          * @default ''
+         */
+        "heading"?: string;
+        /**
+          * @default []
+         */
+        "items"?: string[];
+        /**
+          * @default false
+         */
+        "ordered"?: boolean;
+    }
     interface RpSearchInput {
         /**
           * @default 'Search recipes'
@@ -301,6 +380,29 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface RpTextInput {
+        /**
+          * @default ''
+         */
+        "label"?: string;
+        "onValue-change"?: (event: RpTextInputCustomEvent<{ value: string }>) => void;
+        /**
+          * @default false
+         */
+        "optional"?: boolean;
+        /**
+          * @default ''
+         */
+        "placeholder"?: string;
+        /**
+          * @default 'text'
+         */
+        "type"?: 'text' | 'url';
+        /**
+          * @default ''
+         */
+        "value"?: string;
+    }
 
     interface RpFavoriteButtonAttributes {
         "favorite": boolean;
@@ -319,6 +421,10 @@ declare namespace LocalJSX {
         "subtitle": string;
         "favorite": boolean;
     }
+    interface RpRecipeListAttributes {
+        "heading": string;
+        "ordered": boolean;
+    }
     interface RpSearchInputAttributes {
         "label": string;
         "placeholder": string;
@@ -329,13 +435,22 @@ declare namespace LocalJSX {
         "placeholder": string;
         "value": string;
     }
+    interface RpTextInputAttributes {
+        "label": string;
+        "placeholder": string;
+        "type": 'text' | 'url';
+        "value": string;
+        "optional": boolean;
+    }
 
     interface IntrinsicElements {
         "rp-favorite-button": Omit<RpFavoriteButton, keyof RpFavoriteButtonAttributes> & { [K in keyof RpFavoriteButton & keyof RpFavoriteButtonAttributes]?: RpFavoriteButton[K] } & { [K in keyof RpFavoriteButton & keyof RpFavoriteButtonAttributes as `attr:${K}`]?: RpFavoriteButtonAttributes[K] } & { [K in keyof RpFavoriteButton & keyof RpFavoriteButtonAttributes as `prop:${K}`]?: RpFavoriteButton[K] };
         "rp-meal-slot": Omit<RpMealSlot, keyof RpMealSlotAttributes> & { [K in keyof RpMealSlot & keyof RpMealSlotAttributes]?: RpMealSlot[K] } & { [K in keyof RpMealSlot & keyof RpMealSlotAttributes as `attr:${K}`]?: RpMealSlotAttributes[K] } & { [K in keyof RpMealSlot & keyof RpMealSlotAttributes as `prop:${K}`]?: RpMealSlot[K] };
         "rp-recipe-card": Omit<RpRecipeCard, keyof RpRecipeCardAttributes> & { [K in keyof RpRecipeCard & keyof RpRecipeCardAttributes]?: RpRecipeCard[K] } & { [K in keyof RpRecipeCard & keyof RpRecipeCardAttributes as `attr:${K}`]?: RpRecipeCardAttributes[K] } & { [K in keyof RpRecipeCard & keyof RpRecipeCardAttributes as `prop:${K}`]?: RpRecipeCard[K] };
+        "rp-recipe-list": Omit<RpRecipeList, keyof RpRecipeListAttributes> & { [K in keyof RpRecipeList & keyof RpRecipeListAttributes]?: RpRecipeList[K] } & { [K in keyof RpRecipeList & keyof RpRecipeListAttributes as `attr:${K}`]?: RpRecipeListAttributes[K] } & { [K in keyof RpRecipeList & keyof RpRecipeListAttributes as `prop:${K}`]?: RpRecipeList[K] };
         "rp-search-input": Omit<RpSearchInput, keyof RpSearchInputAttributes> & { [K in keyof RpSearchInput & keyof RpSearchInputAttributes]?: RpSearchInput[K] } & { [K in keyof RpSearchInput & keyof RpSearchInputAttributes as `attr:${K}`]?: RpSearchInputAttributes[K] } & { [K in keyof RpSearchInput & keyof RpSearchInputAttributes as `prop:${K}`]?: RpSearchInput[K] };
         "rp-select": Omit<RpSelect, keyof RpSelectAttributes> & { [K in keyof RpSelect & keyof RpSelectAttributes]?: RpSelect[K] } & { [K in keyof RpSelect & keyof RpSelectAttributes as `attr:${K}`]?: RpSelectAttributes[K] } & { [K in keyof RpSelect & keyof RpSelectAttributes as `prop:${K}`]?: RpSelect[K] };
+        "rp-text-input": Omit<RpTextInput, keyof RpTextInputAttributes> & { [K in keyof RpTextInput & keyof RpTextInputAttributes]?: RpTextInput[K] } & { [K in keyof RpTextInput & keyof RpTextInputAttributes as `attr:${K}`]?: RpTextInputAttributes[K] } & { [K in keyof RpTextInput & keyof RpTextInputAttributes as `prop:${K}`]?: RpTextInput[K] };
     }
 }
 export { LocalJSX as JSX };
@@ -345,8 +460,10 @@ declare module "@stencil/core" {
             "rp-favorite-button": LocalJSX.IntrinsicElements["rp-favorite-button"] & JSXBase.HTMLAttributes<HTMLRpFavoriteButtonElement>;
             "rp-meal-slot": LocalJSX.IntrinsicElements["rp-meal-slot"] & JSXBase.HTMLAttributes<HTMLRpMealSlotElement>;
             "rp-recipe-card": LocalJSX.IntrinsicElements["rp-recipe-card"] & JSXBase.HTMLAttributes<HTMLRpRecipeCardElement>;
+            "rp-recipe-list": LocalJSX.IntrinsicElements["rp-recipe-list"] & JSXBase.HTMLAttributes<HTMLRpRecipeListElement>;
             "rp-search-input": LocalJSX.IntrinsicElements["rp-search-input"] & JSXBase.HTMLAttributes<HTMLRpSearchInputElement>;
             "rp-select": LocalJSX.IntrinsicElements["rp-select"] & JSXBase.HTMLAttributes<HTMLRpSelectElement>;
+            "rp-text-input": LocalJSX.IntrinsicElements["rp-text-input"] & JSXBase.HTMLAttributes<HTMLRpTextInputElement>;
         }
     }
 }

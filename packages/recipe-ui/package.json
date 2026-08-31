@@ -1,6 +1,6 @@
 {
   "name": "@shray0027/recipe-ui",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Reusable recipe cards and meal-plan web components built with Stencil.",
   "type": "module",
   "main": "./dist/index.cjs.js",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shray0027/svelte-recipe-app.git"
+    "url": "git+https://github.com/shray0027/svelte-recipe-app.git"
   },
   "homepage": "https://github.com/shray0027/svelte-recipe-app#readme",
   "bugs": {

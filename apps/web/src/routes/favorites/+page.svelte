@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { base } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { onMount } from 'svelte';
 	import { loadRecipesById } from '$lib/recipes/recipe-loader';
 	import { recipeStore } from '$lib/recipes/store';
@@ -29,7 +29,7 @@
 	}
 
 	function openRecipe(recipeId: string) {
-		void goto(`${base}/recipes/${recipeId}`);
+		void goto(resolve('/recipes/[id]', { id: recipeId }));
 	}
 
 	onMount(() => void loadFavorites());
@@ -49,7 +49,7 @@
 	{:else if error}
 		{@render feedback(error, 'Try again', () => void loadFavorites())}
 	{:else if recipes.length === 0}
-		{@render feedback('You have not saved any recipes yet.', 'Discover recipes', () => void goto(`${base}/`))}
+		{@render feedback('You have not saved any recipes yet.', 'Discover recipes', () => void goto(resolve('/')))}
 	{:else}
 		<div class="grid grid-cols-[repeat(auto-fill,minmax(230px,1fr))] gap-5">
 			{#each recipes as recipe (recipe.id)}
