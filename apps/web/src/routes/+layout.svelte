@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
-	import { defineCustomElements } from '@shray0027/recipe-ui/loader';
+	import { asset, resolve } from '$app/paths';
 	import favicon from '$lib/assets/favicon.svg';
 	import '../app.css';
 	import { onMount } from 'svelte';
@@ -8,7 +7,7 @@
 	let { children } = $props();
 
 	onMount(() => {
-		void defineCustomElements();
+		void import(/* @vite-ignore */ asset('/recipe-ui/loader.js')).then(({ defineCustomElements }) => defineCustomElements());
 	});
 </script>
 
