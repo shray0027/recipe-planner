@@ -25,6 +25,6 @@
 		"vite": "^8.0.16"
 	},
 	"dependencies": {
-		"@shray0027/recipe-ui": "^0.1.3"
+		"@shray0027/recipe-ui": "^0.1.4"
 	}
 }

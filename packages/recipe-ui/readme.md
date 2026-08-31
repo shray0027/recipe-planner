@@ -8,7 +8,9 @@ Reusable recipe cards and meal-planner web components built with Stencil.
 - `<rp-meal-slot>` displays a day in a weekly plan and emits `meal-slot-select` and `meal-slot-remove` events.
 - `<rp-select>` displays a labelled select input and emits `value-change` with the selected value.
 - `<rp-search-input>` displays a labelled search input and emits `value-change` as the query changes.
+- `<rp-text-input>` displays a labelled text or URL input and emits `value-change` as its value changes.
 - `<rp-favorite-button>` displays a favorite toggle and emits `favorite-toggle`.
+- `<rp-recipe-list>` displays a titled ordered or unordered recipe list.
 
 Both components use Shadow DOM. `rp-recipe-card` provides an `actions` slot and `rp-meal-slot` provides an `empty` slot.
 

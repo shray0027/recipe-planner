@@ -1,15 +1,17 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { defineCustomElements } from '@shray0027/recipe-ui/loader';
+	import '@shray0027/recipe-ui/components/rp-favorite-button';
+	import '@shray0027/recipe-ui/components/rp-meal-slot';
+	import '@shray0027/recipe-ui/components/rp-recipe-card';
+	import '@shray0027/recipe-ui/components/rp-recipe-list';
+	import '@shray0027/recipe-ui/components/rp-search-input';
+	import '@shray0027/recipe-ui/components/rp-select';
+	import '@shray0027/recipe-ui/components/rp-text-input';
 	import favicon from '$lib/assets/favicon.svg';
 	import '../app.css';
-	import { onMount } from 'svelte';
 
 	let { children } = $props();
 
-	onMount(() => {
-		void defineCustomElements();
-	});
 </script>
 
 <svelte:head>
