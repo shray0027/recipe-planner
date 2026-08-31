@@ -57,5 +57,5 @@ Import the repository into Vercel and set `apps/web` as the project root directo
 ## Links
 
 - Stencil library: [`@shray0027/recipe-ui`](https://www.npmjs.com/package/@shray0027/recipe-ui)
-- GitHub repository: [shray0027/svelte-recipe-app](https://github.com/shray0027/svelte-recipe-app)
-- GitHub Pages deployment: `https://shray0027.github.io/svelte-recipe-app/` after the configured deployment workflow has run successfully.
+- GitHub repository: [shray0027/recipe-planner](https://github.com/shray0027/recipe-planner)
+- GitHub Pages deployment: `https://shray0027.github.io/recipe-planner/` after the configured deployment workflow has run successfully.

@@ -33,4 +33,4 @@ npm run build
 npm publish
 ```
 
-Source: https://github.com/shray0027/svelte-recipe-app
+Source: https://github.com/shray0027/recipe-planner

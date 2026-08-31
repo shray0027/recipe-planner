@@ -23,11 +23,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shray0027/svelte-recipe-app.git"
+    "url": "git+https://github.com/shray0027/recipe-planner.git"
   },
-  "homepage": "https://github.com/shray0027/svelte-recipe-app#readme",
+  "homepage": "https://github.com/shray0027/recipe-planner#readme",
   "bugs": {
-    "url": "https://github.com/shray0027/svelte-recipe-app/issues"
+    "url": "https://github.com/shray0027/recipe-planner/issues"
   },
   "files": [
     "dist/",
